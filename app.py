@@ -1,4 +1,9 @@
 import math
+
+#print
+def p(n):
+    print(n)
+
 #入力をリストにする
 def in_li():
     return list(map(int,input().split()))
@@ -49,18 +54,37 @@ def check(L,R,content):
     return is_a
 
 
-N,M = in_i()
-content = []
-for i in range(N):
-    L,R = in_i()
-    content.append((L,R))
+N,Q = in_i()
+H = []
+T = []
+for i in range(Q):
+    h,t = in_s()
+    if h == "L":
+        H.append(1)
+    else:
+        H.append(-1)
+    T.append(int(t))
 
-content = sorted(content)
-ans = set()
-for i in range(M):
-    L,R = i+1,i+1
-    for u in range(M-L+1):
-        if check(L,R+u,content):
-            ans.add((L,R+u))
 
-print(len(ans))
+
+#初期化 L=1,R=-1
+LR = { 1 : 1 , -1 : 2 }
+total = 0
+con = []
+
+for i in range(Q):
+    rl = H[i]
+    data = LR[rl],T[i]
+    data = sorted(data)
+    
+    con = []
+    if not(data[1] > LR[rl*-1] and LR[rl*-1] > data[0]):
+        con.append(data[1]-data[0])
+    if not(LR[rl*-1] > data[1] or data[0] > LR[rl*-1]):
+        con.append(N-data[1]+data[0])
+        
+    data = min(con)
+    total += data
+    LR[rl] = T[i]
+
+print(total)

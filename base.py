@@ -1,3 +1,7 @@
+#print
+def p(n):
+	print(n)
+
 #入力をリストにする
 def in_li():
     return list(map(int,input().split()))
