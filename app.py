@@ -1,4 +1,6 @@
 import math
+from itertools import product
+import copy
 
 #print
 def p(n):
@@ -44,47 +46,29 @@ def mod_min(n,a,b):
     k = math.ceil((n - b) / a)
     return k * a + b
 
-
-def check(L,R,content):
-    is_a = True
-    for i in content:
-        if i[0] >= L and i[1] <= R:
-            is_a = False
-    
+def check(S):
+    is_a = False
+    val = (len(S)+1)//2-1
+    if S[val] == "/":
+        if S[0:val] == "1"*val:
+            if S[val+1:len(S)] == "2"*val:
+                is_a = True
     return is_a
 
+#入力
+N = int(input())
+A = []
+S = []
+for i in range(N):
+    A.append(list(input()))
 
-N,Q = in_i()
-H = []
-T = []
-for i in range(Q):
-    h,t = in_s()
-    if h == "L":
-        H.append(1)
-    else:
-        H.append(-1)
-    T.append(int(t))
+S = copy.deepcopy(A)
 
+for i in range(1,N//2+1):
+    for x in range(i,N+2-i):
+        for y in range(i,N+2-i):
+            S[y-1][N-x] = A[x-1][y-1]
+    A = copy.deepcopy(S)
 
-
-#初期化 L=1,R=-1
-LR = { 1 : 1 , -1 : 2 }
-total = 0
-con = []
-
-for i in range(Q):
-    rl = H[i]
-    data = LR[rl],T[i]
-    data = sorted(data)
-    
-    con = []
-    if not(data[1] > LR[rl*-1] and LR[rl*-1] > data[0]):
-        con.append(data[1]-data[0])
-    if not(LR[rl*-1] > data[1] or data[0] > LR[rl*-1]):
-        con.append(N-data[1]+data[0])
-        
-    data = min(con)
-    total += data
-    LR[rl] = T[i]
-
-print(total)
+for i in range(N):
+    p(''.join(A[i]))
