@@ -56,19 +56,8 @@ def check(S):
     return is_a
 
 #入力
-N = int(input())
-A = []
-S = []
-for i in range(N):
-    A.append(list(input()))
-
-S = copy.deepcopy(A)
-
-for i in range(1,N//2+1):
-    for x in range(i,N+2-i):
-        for y in range(i,N+2-i):
-            S[y-1][N-x] = A[x-1][y-1]
-    A = copy.deepcopy(S)
-
-for i in range(N):
-    p(''.join(A[i]))
+S = input()
+if S[-3] == "s" and S[-2] == "a" and S[-1] == "n":
+    print("Yes")
+else:
+    print("No")
