@@ -57,7 +57,16 @@ def check(S):
 
 #入力
 S = input()
-if S[-3] == "s" and S[-2] == "a" and S[-1] == "n":
-    print("Yes")
+T = input()
+
+if S == T:
+	print(0)
 else:
-    print("No")
+	count = 1
+	for i in range(min(len(S),len(T))):
+		count += 1
+		if S[i] != T[i]:
+			count -= 1
+			break
+	
+	print(count)
