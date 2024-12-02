@@ -56,17 +56,14 @@ def check(S):
     return is_a
 
 #入力
-N = int(input())
-K = in_li()
-K = sorted(K,reverse=True)
 
-total = sum(K)
-target = total//2
-n = len(K)
 
-dp = [False] * (target + 1)
-dp[0] = True
-for i in K:
-    for u in range(target,i-1,-1):
-        dp[u] = dp[u] or dp[u-i]
+#初期化
+count = 0
 
+for i in range(12):
+    a = input()
+    if i == len(a)-1:
+        count += 1
+
+print(count)
