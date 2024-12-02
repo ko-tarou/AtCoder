@@ -56,15 +56,9 @@ def check(S):
     return is_a
 
 #入力
-data = list(input())
-place = data.index("A")
+N = int(input())
+A = in_i()
+B = in_i()
 
 
-#初期化
-total = 0
-
-for i in range(ord("A"),ord("Z")+1):
-    total += abs(place - data.index(chr(i)))
-    place = data.index(chr(i))
-
-p(total)
+p(max(A)+max(B))
