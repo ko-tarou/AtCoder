@@ -56,9 +56,16 @@ def check(S):
     return is_a
 
 #入力
-N = int(input())
-A = in_i()
-B = in_i()
+N,M = in_i()
+u = []
+for i in range(M):
+	u.append(in_li())
 
 
-p(max(A)+max(B))
+#初期化
+
+for i in range(N):
+	
+
+for i in range(M):
+print(u)
