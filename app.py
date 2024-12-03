@@ -1,6 +1,7 @@
 import math
 from itertools import product
 import copy
+import numpy as np
 
 #print
 def p(n):
@@ -26,7 +27,7 @@ def in_s():
 
 #リストを空白空けて返す
 def out_list(data):
-    return " ".join(map(str,data))
+    print(" ".join(map(str,data)))
 
 #0からnumまでindexをループさせる
 def loop(index,num):
@@ -56,46 +57,23 @@ def check(S):
     return is_a
 
 #入力
-N,Q = in_i()
-S = input()
-X,C = [],[]
-
-for i in range(Q):
-    x,c = in_s()
-    X.append(x)
-    C.append(c)
+N = int(input())
+H = in_li()
 
 #初期化
-S = list(S)
-count = 0
+ans = []
+count = np.zeros(N,dtype=int)
 
-for i in range(N-2):
-    if S[i] == "A" and S[i+1] == "B" and S[i+2] == "C":
-        count += 1
-
-for i in range(Q):
+for i in range(N-1,0,-1):
     
-    index = int(X[i])-1
-    
-    s_min = index - 2 if index-2 >= 0 else 0
-    s_max = index + 3 if index+3 <= len(S) else len(S)
-    if "ABC" in "".join(S[s_min:s_max]):
-        data1 = 1
-        
-    else:
-        data1 = 0
-    
-    S[index] = C[i]
-
-    s_min = index - 2 if index-2 >= 0 else 0
-    s_max = index + 3 if index+3 <= len(S) else len(S)
-    
-    
-    if "ABC" in "".join(S[s_min:s_max]):
-        data2 = 1
-    else:
-        data2 = 0
-    
-    count += data2-data1
+    for u in range(i-1,-1,-1):
+        if max(H[u:i+1]) == H[i]:
+            count[u] += 1
+        else:
+            break
     
     p(count)
+    
+out_list(count)
+
+
