@@ -47,41 +47,41 @@ def mod_min(n,a,b):
     k = math.ceil((n - b) / a)
     return k * a + b
 
-def check(S):
-    is_a = False
-    val = (len(S)+1)//2-1
-    if S[val] == "/":
-        if S[0:val] == "1"*val:
-            if S[val+1:len(S)] == "2"*val:
-                is_a = True
-    return is_a
-
 #入力
-N,M = in_i()
-A,B = [],[]
-for i in range(M):
-    a,b = in_ls()
-    A.append(int(a))
-    B.append(b)
+N = int(input())
+data = []
+for i in range(N):
+    data.append(in_li())
+    
+p(data)
 
 #初期化
-memory = {}
-i_s = False
-for i in range(M):
-    memory[i] = ""
-    
-for i in range(M):
-    if B[i] == "M":
-        if memory[A[i]] != "Yes":
-            memory[A[i]] = "Yes"
-            i_s = True
-            
+result = -1
+num = 0
+for i in range(0,N-2):
+    total = 0
+    result_o = 0
+    total_num = [0,0]
+    for u in range(3):
+        if i == result:
+            continue
         else:
-            i_s = False
-    else:
-        i_s = False
+            result_o = i
+        for z in range(3):
+            if z == result_o:
+                continue
+            else:
+                result_o = z
+            for o in range(3):
+                if o == result_o:
+                    continue
+                else:
+                    total = max(total,data[i][u]+data[i+1][z]+data[i+2][o])
+                    p(total)
+                    if total < data[i][u]+data[i+1][z]+data[i+2][o]:
+                        total_num = [data[i][u],u]
+
+    num += total_num[0]
+    result = total_num[1]
     
-    if i_s:
-        p("Yes")
-    else:
-        p("No")
+p(num)
