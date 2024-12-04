@@ -57,23 +57,31 @@ def check(S):
     return is_a
 
 #入力
-N = int(input())
-H = in_li()
+N,M = in_i()
+A,B = [],[]
+for i in range(M):
+    a,b = in_ls()
+    A.append(int(a))
+    B.append(b)
 
 #初期化
-ans = []
-count = np.zeros(N,dtype=int)
-
-for i in range(N-1,0,-1):
+memory = {}
+i_s = False
+for i in range(M):
+    memory[i] = ""
     
-    for u in range(i-1,-1,-1):
-        if max(H[u:i+1]) == H[i]:
-            count[u] += 1
+for i in range(M):
+    if B[i] == "M":
+        if memory[A[i]] != "Yes":
+            memory[A[i]] = "Yes"
+            i_s = True
+            
         else:
-            break
+            i_s = False
+    else:
+        i_s = False
     
-    p(count)
-    
-out_list(count)
-
-
+    if i_s:
+        p("Yes")
+    else:
+        p("No")
