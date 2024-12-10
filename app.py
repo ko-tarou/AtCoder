@@ -47,12 +47,6 @@ def mod_min(n,a,b):
     k = math.ceil((n - b) / a)
     return k * a + b
 
-def str_len(S):
-    s = ""
-    for i in S:
-        s += i
-    
-    return s
 
 #入力
 S = input()
