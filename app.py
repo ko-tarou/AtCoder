@@ -49,39 +49,16 @@ def mod_min(n,a,b):
 
 #入力
 N = int(input())
-data = []
+A = []
 for i in range(N):
-    data.append(in_li())
-    
-p(data)
+    A.append(in_li())
 
 #初期化
-result = -1
-num = 0
-for i in range(0,N-2):
-    total = 0
-    result_o = 0
-    total_num = [0,0]
-    for u in range(3):
-        if i == result:
-            continue
-        else:
-            result_o = i
-        for z in range(3):
-            if z == result_o:
-                continue
-            else:
-                result_o = z
-            for o in range(3):
-                if o == result_o:
-                    continue
-                else:
-                    total = max(total,data[i][u]+data[i+1][z]+data[i+2][o])
-                    p(total)
-                    if total < data[i][u]+data[i+1][z]+data[i+2][o]:
-                        total_num = [data[i][u],u]
+num = 1
+ans = 0
 
-    num += total_num[0]
-    result = total_num[1]
-    
-p(num)
+for i in range(1,N+1):
+    ans = A[max(num,i)-1][min(num,i)-1]
+    num = ans
+
+print(ans)
