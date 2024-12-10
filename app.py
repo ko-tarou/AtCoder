@@ -47,18 +47,29 @@ def mod_min(n,a,b):
     k = math.ceil((n - b) / a)
     return k * a + b
 
+def str_len(S):
+    s = ""
+    for i in S:
+        s += i
+    
+    return s
+
 #入力
-N = int(input())
-A = []
-for i in range(N):
-    A.append(in_li())
+S = input()
+T = input()
 
 #初期化
-num = 1
-ans = 0
+S = S[::-1]
+T = T[::-1]
+S = list(S)
+T = list(T)
+X = []
 
-for i in range(1,N+1):
-    ans = A[max(num,i)-1][min(num,i)-1]
-    num = ans
+for i in range(len(S)):
+    if S[i] != T[i]:
+        S[i] = T[i]
+        X.append(str_len(S)[::-1])
 
-print(ans)
+print(len(X))
+for i in X:
+    print(i)
