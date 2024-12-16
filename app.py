@@ -49,21 +49,13 @@ def mod_min(n,a,b):
 
 
 #入力
-S = input()
-T = input()
+A,B = in_i()
+if A == B:
+    print(1)
+
+elif abs(A-B)%2 == 0:
+    print(3)
+else:
+    print(2)
 
 #初期化
-S = S[::-1]
-T = T[::-1]
-S = list(S)
-T = list(T)
-X = []
-
-for i in range(len(S)):
-    if S[i] != T[i]:
-        S[i] = T[i]
-        X.append(str_len(S)[::-1])
-
-print(len(X))
-for i in X:
-    print(i)
