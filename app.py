@@ -53,6 +53,7 @@ N = int(input())
 A = in_li()
 
 #初期化
+rl = 1
 result_1 = 0
 result_2 = 0
 dp = [0]*N
@@ -61,18 +62,49 @@ for i in range(N):
     mark = A[i]
     if result_2 == 0:
         result_2 = mark
-        dp[i] = 1
+        dp[i] = mark
+        rl = rl * -1
     elif result_1 == 0:
         result_1 = result_2
         result_2 = mark
-        dp[i] = 2
+        dp[i] = mark
+        rl = rl * -1
     else:
-        if(result_2-result_1 == mark - result_2):
-            dp[i] = dp[i-1]+1
+        if rl == 1 and result_2*2+mark < mark * 2:
+                result_2 = mark
+                if dp[i-1] > dp[i-2]:
+                    dp[i-2] = 0
+                else:
+                    dp[i-1] = 0
+                dp[i] = mark
         else:
-            dp[i] = 2
+            result_1 = result_2
+            result_2 = mark
+            dp[i] = mark
+            rl = rl * -1
             
-        result_1 = result_2
-        result_2 = mark
 
-print(sum(dp))
+combo = 0
+for i in range(N):
+    if dp[i] == 0:
+        if combo == 1:
+            dp[i] = A[i]
+            dp[i-1] = A[i-1]
+        else:
+            combo = 1
+    else:
+        combo = 0
+
+rl = 1
+ans = 0
+for i in dp:
+    if i == 0:
+        continue
+    elif rl == 1:
+        ans += i
+    else:
+        ans += i*2
+    rl = rl*-1
+
+print(dp)
+print(ans)
