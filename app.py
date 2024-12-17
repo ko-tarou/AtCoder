@@ -49,13 +49,29 @@ def mod_min(n,a,b):
 
 
 #入力
-A,B = in_i()
-if A == B:
-    print(1)
+N = int(input())
+A = []
+S = []
 
-elif abs(A-B)%2 == 0:
-    print(3)
-else:
-    print(2)
+for i in range(N):
+    a,s = in_s()
+    A.append(int(a))
+    if s == "L":
+        S.append(0)
+    else:
+        S.append(1)
 
 #初期化
+data = {0:-1,1:-1}
+cost = 0
+
+for i in range(N):
+    rl = S[i]
+    mark = A[i]
+    if data[rl] == -1:
+        data[rl] = mark
+    else:
+        cost += abs(data[rl]-mark)
+        data[rl] = mark
+
+print(cost)
