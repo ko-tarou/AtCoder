@@ -50,28 +50,29 @@ def mod_min(n,a,b):
 
 #入力
 N = int(input())
-A = []
-S = []
-
-for i in range(N):
-    a,s = in_s()
-    A.append(int(a))
-    if s == "L":
-        S.append(0)
-    else:
-        S.append(1)
+A = in_li()
 
 #初期化
-data = {0:-1,1:-1}
-cost = 0
+result_1 = 0
+result_2 = 0
+dp = [0]*N
 
 for i in range(N):
-    rl = S[i]
     mark = A[i]
-    if data[rl] == -1:
-        data[rl] = mark
+    if result_2 == 0:
+        result_2 = mark
+        dp[i] = 1
+    elif result_1 == 0:
+        result_1 = result_2
+        result_2 = mark
+        dp[i] = 2
     else:
-        cost += abs(data[rl]-mark)
-        data[rl] = mark
+        if(result_2-result_1 == mark - result_2):
+            dp[i] = dp[i-1]+1
+        else:
+            dp[i] = 2
+            
+        result_1 = result_2
+        result_2 = mark
 
-print(cost)
+print(sum(dp))
