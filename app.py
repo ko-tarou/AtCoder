@@ -49,62 +49,53 @@ def mod_min(n,a,b):
 
 
 #入力
-N = int(input())
-A = in_li()
+L,R = in_i()
+top = int(str(L)[0])
+fin_top = int(str(R)[0])
+length = len(str(L))
+fin_length = len(str(R))
+key = True
+total = 0
 
-#初期化
-rl = 1
-result_1 = 0
-result_2 = 0
-dp = [0]*N
+while(key):
+	total += (top)**(length-1)
 
-for i in range(N):
-    mark = A[i]
-    if result_2 == 0:
-        result_2 = mark
-        dp[i] = mark
-        rl = rl * -1
-    elif result_1 == 0:
-        result_1 = result_2
-        result_2 = mark
-        dp[i] = mark
-        rl = rl * -1
-    else:
-        if rl == 1 and result_2*2+mark < mark * 2:
-                result_2 = mark
-                if dp[i-1] > dp[i-2]:
-                    dp[i-2] = 0
-                else:
-                    dp[i-1] = 0
-                dp[i] = mark
-        else:
-            result_1 = result_2
-            result_2 = mark
-            dp[i] = mark
-            rl = rl * -1
-            
+	if top == fin_top and length == fin_length:
+		key = False
 
-combo = 0
-for i in range(N):
-    if dp[i] == 0:
-        if combo == 1:
-            dp[i] = A[i]
-            dp[i-1] = A[i-1]
-        else:
-            combo = 1
-    else:
-        combo = 0
+	top += 1
+	if top == 10:
+		top = 1
+		length += 1
 
-rl = 1
-ans = 0
-for i in dp:
-    if i == 0:
-        continue
-    elif rl == 1:
-        ans += i
-    else:
-        ans += i*2
-    rl = rl*-1
+p(total)
 
-print(dp)
-print(ans)
+#一回目の調整
+top = int(str(L)[0])
+length = len(str(L))
+
+data = str(top)
+for i in range(length-1):
+    data += str(top-1)
+
+if L < int(data):
+	total -= L - top*(10**(length-1))
+else:
+    p(data)
+    p(top*(10**(length-1)))
+    total -= int(data) - top*(10**(length-1))
+
+p(total)
+
+#二回目の調整
+fin_top = int(str(R)[0])
+fin_length = len(str(R))
+
+data = str(fin_top)
+for i in range(fin_length-1):
+	data += str(fin_top-1)
+
+if R < int(data):
+	total -= int(data) - R
+
+print(total)
