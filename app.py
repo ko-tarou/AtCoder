@@ -2,6 +2,7 @@ import math
 from itertools import product
 import copy
 import numpy as np
+from collections import deque
 
 #print
 def p(n):
@@ -49,17 +50,24 @@ def mod_min(n,a,b):
 
 
 #入力
-X = int(input())
+Q = int(input())
 
-Y = int(math.log(X,math.e))
-factorial = math.factorial(Y)
-while factorial < X:
-	Y += 1
-	factorial *= Y
+query= deque()
+prefix = [0]
+memory = 0
 
-while factorial > X:
-    factorial //= Y	
-    Y -= 1
 
-if factorial == X:
-    print(Y)
+for i in range(Q):
+    data = input()
+    num = int(data[0])
+    if num == 1:
+        l = int(data[2:])
+        query.append(l)
+        prefix.append(prefix[-1]+l)
+    
+    if num == 2:
+        memory += 1
+    
+    if num == 3:
+        l = int(data[2:])
+        p(prefix[l+memory-1]-prefix[memory])
