@@ -49,6 +49,17 @@ def mod_min(n,a,b):
 
 
 #入力
-S = input()
-ans = int(S[0])*int(S[2])
-p(ans)
+X = int(input())
+
+Y = int(math.log(X,math.e))
+factorial = math.factorial(Y)
+while factorial < X:
+	Y += 1
+	factorial *= Y
+
+while factorial > X:
+    factorial //= Y	
+    Y -= 1
+
+if factorial == X:
+    print(Y)
