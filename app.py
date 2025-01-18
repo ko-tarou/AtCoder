@@ -49,53 +49,6 @@ def mod_min(n,a,b):
 
 
 #入力
-L,R = in_i()
-top = int(str(L)[0])
-fin_top = int(str(R)[0])
-length = len(str(L))
-fin_length = len(str(R))
-key = True
-total = 0
-
-while(key):
-	total += (top)**(length-1)
-
-	if top == fin_top and length == fin_length:
-		key = False
-
-	top += 1
-	if top == 10:
-		top = 1
-		length += 1
-
-p(total)
-
-#一回目の調整
-top = int(str(L)[0])
-length = len(str(L))
-
-data = str(top)
-for i in range(length-1):
-    data += str(top-1)
-
-if L < int(data):
-	total -= L - top*(10**(length-1))
-else:
-    p(data)
-    p(top*(10**(length-1)))
-    total -= int(data) - top*(10**(length-1))
-
-p(total)
-
-#二回目の調整
-fin_top = int(str(R)[0])
-fin_length = len(str(R))
-
-data = str(fin_top)
-for i in range(fin_length-1):
-	data += str(fin_top-1)
-
-if R < int(data):
-	total -= int(data) - R
-
-print(total)
+S = input()
+ans = int(S[0])*int(S[2])
+p(ans)
