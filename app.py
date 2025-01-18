@@ -49,25 +49,43 @@ def mod_min(n,a,b):
     return k * a + b
 
 
+def check(x,y,R):
+    if (x+0.5)**2 + (y+0.5)**2 <= R**2:
+        return True
+    else:
+        return False
+
 #入力
-Q = int(input())
+R = int(input())
 
-query= deque()
-prefix = [0]
-memory = 0
+point = R
+origin_x = 0
+is_loop = True
+total = 0
+none_total = 0
 
+while is_loop:
+    x = origin_x
+    y = 0
 
-for i in range(Q):
-    data = input()
-    num = int(data[0])
-    if num == 1:
-        l = int(data[2:])
-        query.append(l)
-        prefix.append(prefix[-1]+l)
+    for _ in range(point):
+        if check(x,y,R):
+            total += 1
+            if y == 0:
+                none_total += 1
+            x += 1
+            y += 1
+        else:
+            if y == 0:
+                is_loop = False
+            break
     
-    if num == 2:
-        memory += 1
-    
-    if num == 3:
-        l = int(data[2:])
-        p(prefix[l+memory-1]-prefix[memory])
+    if x == y:
+        one = total
+
+    point = y
+    origin_x += 1
+
+
+four = (total-one)*2+one
+p((four-none_total)*4+1)
